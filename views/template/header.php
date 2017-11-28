@@ -15,3 +15,29 @@
         <link rel="stylesheet" href="../assets/css/main.css">
         <!-- <script src="../assets/js/vendor/modernizr-2.8.3.min.js"></script> -->
     </head>
+    <header id="header" class="">
+	 <nav class="navbar navbar-toggleable-md  bg-faded" id="menubook">
+	            
+			  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"  id="buttonnav" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <img src="../assets/img/imgnav.jpeg" alt="image_livre" class="img-fluid" id="imagenav">
+
+			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+			    <ul class="navbar-nav">
+			      <li class="nav-item active">
+			        <a class="nav-link ml-5" href="#">livres <span class="sr-only">(current)</span></a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">Utilisateurs</a>
+			      </li>
+			     			     
+			    </ul>
+			  </div>
+			  
+			</nav>
+
+    	
+    </header><!-- /header -->
