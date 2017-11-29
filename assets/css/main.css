@@ -101,12 +101,20 @@ textarea {
 /* ##########################   SMARTPHONE   ########################### */
 /* ##################################################################### */
 /* Extra small devices (phones, less than 768px) */
-
-  .navbar
+*
+{
+  margin:0;
+  padding: 0;
+}
+ 
+  .navbar, .footer
   {
     background-color: black;
+    font-family: 'Crimson Text', sans-serif;
  
   }
+
+
    #menubook a
    {
      color:#aebbc6;
@@ -129,6 +137,7 @@ textarea {
     color:white;
     padding: 1em 1em;
     margin:auto;
+
    }
    .selectbook
    {
@@ -137,8 +146,67 @@ textarea {
     height: 200px;
     width: 800px;
     border:1px solid red;
+    color:rgb(253,254,246);
+    
+
    }
-  
+   .selectbook h2
+   {
+     font-size: 3em;
+     text-align: center;
+     font-style: italic;
+     font-family: 'Crimson Text', sans-serif;
+   }
+
+   #collapseExample .card-bloc
+   {
+     padding: 0px;
+   }
+  #collapseExample .card
+  {
+    border:none;
+  }
+  #buton, #buton2
+  {
+    color:rgb(230,69,59);
+    
+    border:none;
+   font-family: 'Crimson Text', sans-serif;
+
+  }
+  #buton:hover, #buton2:hover
+  {
+    border-color:rgb(230,69,59);
+  }
+  .add-form label
+  {
+    font-size: 12px;
+  }
+  .add-form input[ type="file"]
+  {
+    overflow: hidden;
+  }
+  #selectbook 
+  {
+    color:white;
+    border:none;
+    padding: 0.5em 0.5em;
+    background-color: transparent;
+  }
+  #selectbook option 
+  {
+    background-color: none;
+    color:black;
+  }
+
+  .footer
+  {
+    color:rgb(230,69,59);
+    height: 100px;
+    margin:auto;
+    text-align: center;
+
+  }
 
 /* ##################################################################### */
 /* ############################   TABLETS   ############################ */

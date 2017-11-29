@@ -106,25 +106,28 @@ class BookManager
          // var_dump($resul);
          
                 return new $categ($resul);
-      } 
+      
            
  
   } 
 
+/**
+ * updte book 
+ * @param  book $b [
+ * 
+ */
 
-
- public function update_Acount($acount)
+ public function updateBook(Book $b)
  {
    
-    $req=$this->db->prepare('UPDATE acount SET  namecustomer=:namecustomer, sold=:sold, type=:type WHERE id=:id') ;
+    $req=$this->db->prepare('UPDATE books SET  state=:state WHERE id=:id') ;
 
-      $req->bindValue('id', $acount->id(), PDO::PARAM_INT );
-      $req->bindValue('namecustomer', $acount->namecustomer(), PDO::PARAM_STR );
-      $req->bindValue('type', $acount->type(), PDO::PARAM_STR);
-      $req->bindValue('sold', $acount->sold());
+      $req->bindValue('id', $b->id(), PDO::PARAM_INT );
+      $req->bindValue('state', $b->state(), PDO::PARAM_STR );
       $req->execute();
 
  }
+
 
 
 

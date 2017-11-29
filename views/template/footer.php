@@ -1,5 +1,5 @@
-<footer>
-  <p>OUAJA@</p>
+<footer class="footer pt-4">
+  <p>OUAJA@2017</p>
 </footer>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-1.12.0.min.js"><\/script>')</script>

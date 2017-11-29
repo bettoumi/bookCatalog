@@ -40,6 +40,13 @@ class Book
    */
    protected $realiseDate;
 
+    /**
+     * @var $abstract
+     */
+
+    protected $abstractb;
+
+      
 
      /*
         Construct of book
@@ -61,6 +68,7 @@ class Book
   public function category(){ return $this->category;}
   public function state(){ return $this->state;}
   public function realiseDate(){ return $this->realiseDate;}
+  public function abstractb(){ return $this->abstractb;}
   
  /**
      * Set id
@@ -81,30 +89,7 @@ class Book
 		     }
     }
 
-   /**
-     * Set author
-     *
-     * @param \string $id
-     *
-     */
-    public function setId($id) 
-   {
-		    $id=(int)$id;
-		    if($id>0) 
-		    {
-		    	$this->id=$id;
-		    }  
-		    else {
-		          trigger_error('id invalide ', E_USER_WARNING);
-		          return;
-		     }
-    }
-
-
-
-
-
-
+  
     /**
      * Set title
      *
@@ -179,9 +164,42 @@ class Book
 		     }
     }
 
+    /**
+     * Set realiseDate
+     *
+     * @param \string $realiseDate
+     *
+     */
+    public function setRealiseDate($realiseDate) 
+   {
+		    
+		   $this->realiseDate= new DateTime($realiseDate);
+		    	
+		   
+    }
    
- 
 
+
+
+    /**
+     * Hydrater
+     *
+     * @param \array infoBook
+     *
+     */
+ 
+public function hydrater(array $infoBook)
+{
+	foreach ($infoBook as $book=> $value)
+	 {
+		$setters='set'.ucfirst($Book);
+		if(method_exists($this, $setters))
+		{
+			$this->$setters($value);
+		}
+
+	}
+}
    
 
 

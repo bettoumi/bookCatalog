@@ -1,5 +1,5 @@
 <?php
-class novel
+class Novel extends Book
 {
 	
 }
