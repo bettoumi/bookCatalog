@@ -98,10 +98,24 @@ spl_autoload_register('loadclass');
  * 
  */
   
-    $allbookallPicture= $Bookmanager->selecAllBook() ;
+    $allBooks= $Bookmanager->selecAllBook() ;
+      
+       $books=[];
+       $pictures=[];
+       foreach ($allBooks as $book )
+       {
+               $categ=ucfirst($book['category']);
+                     
+               $books[]=new $categ($book);
+               $pictures[]= new Picture($book);
+           
+        }
+        
 
-
-
+    
+   
+          
+   
 
 
 

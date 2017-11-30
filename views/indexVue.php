@@ -37,14 +37,26 @@
 
   	                     <!--  Display   Books -->
   	 <div class="detailsbook row">
+  	      <?php 
+              foreach ($books as $book) {
+              	     foreach ($pictures as $picture) {
+              	     	
+              	    
+  	      ?>
   	 	<div class="card col" style="max-width: 15rem;">
-		  <img class="card-img-top" src="..." alt="Card image cap">
+		  <img class="card-img-top fluid " src="<?php echo $picture->src();?>" alt="">
 		  <div class="card-block">
-		    <h4 class="card-title">Card title</h4>
+		    <h4 class="card-title"><?php echo $book->title();?></h4>
 		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 		    <a href="#" class="btn btn-primary">Détail</a>
 		  </div>
 		</div>
+
+
+		  <?php
+		}}
+
+		  ?>
   	 </div>
 
   </div>

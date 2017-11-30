@@ -89,17 +89,8 @@ class BookManager
         $allBooks=$req->fetchAll(PDO::FETCH_ASSOC);
           
           
-        foreach ($allBooks as $book )
-       {
-               $categ=ucfirst($book['category']);
-                     
-               $books[]=new $categ($book);
-               $pictures[]= new Picture($book);
-           
-          }
-        
        
-         return  [$books, $pictures];
+         return  $allBooks;
 
           
         
