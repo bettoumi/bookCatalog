@@ -15,7 +15,7 @@ class BookManager
 	}
 
 	/**
-	 *  stbd
+	 *  stDb
 	 */
 
    public function setDb($db)
@@ -29,20 +29,46 @@ class BookManager
     * Add book in data base
     * @param  Book $b
     */
-    public function addBook(Book $b)
+    public function addBook(Book $b, $idpicture)
+   {   
+          
+       // var_dump($b);
+       var_dump($b->title());
+       var_dump($b->author());
+       var_dump($b->category());
+       var_dump($b->abstractb());
+       var_dump($idpicture);
+
+
+
+        $req=$this->db->prepare('INSERT INTO books(title, author, category, abstractb, realiseDate, id_picture) VALUES(:title, :author,  :category, :abstractb, :realiseDate, :id_picture)');
+       
+
+        $req->bindValue('title', $b->title(), PDO::PARAM_STR );
+        $req->bindValue('author', $b->author(), PDO::PARAM_STR);
+       
+        $req->bindValue('category', $b->category(),PDO::PARAM_STR);
+        $req->bindValue('abstractb', $b->abstractb(),PDO::PARAM_STR);
+        $req->bindValue('realiseDate', $b->realiseDate());
+        $req->bindValue('id_picture', $idpicture, PDO::PARAM_INT);
+        $req->execute();
+        //return $this->db->lastInsertId();
+    
+
+  }  /**
+    * Add image in data base
+    * @param  Picture $P
+    * @return last id (integer)
+    */
+    public function addPicture(Picture $p)
    {   
           
 
-      	$req=$this->db->prepare('INSERT INTO books(title, author, state,  category, abstract, realiseDate) VALUES(:title, :author,  :category, :abstract, :realiseDate)');
+      	$req=$this->db->prepare('INSERT INTO bookPicture(src) VALUES(:src)');
 
-      	$req->bindValue('title', $b->title(), PDO::PARAM_STR );
-      	$req->bindValue('author', $b->author(), PDO::PARAM_STR);
-      	$req->bindValue('state', $b->state(), PDO::PARAM_STR);
-      	$req->bindValue('category', $b->category(),PDO::PARAM_STR);
-      	$req->bindValue('abstract', $b->abstarct(),PDO::PARAM_STR);
-      	$req->bindValue('realiseDate', $b->realiseDate());
+      	$req->bindValue('src', $p->src(), PDO::PARAM_STR );
       	$req->execute();
-        //return $this->db->lastInsertId();
+        return $this->db->lastInsertId();
     
 
   }  
@@ -57,19 +83,26 @@ class BookManager
      
  
        $books=[];
-       $req=$this->db->query('SELECT id, title, author, state, category, abstract, realiseDate   FROM books') ;
+       $pictures=[];
+       $req=$this->db->query("SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.abstractb, B.availability, BP.src  FROM books  AS B INNER JOIN bookPicture AS BP  ON B.id_picture=BP.id") ;
+     
         $allBooks=$req->fetchAll(PDO::FETCH_ASSOC);
           
-
+          
         foreach ($allBooks as $book )
-         {
+       {
                $categ=ucfirst($book['category']);
-    		             
+                     
                $books[]=new $categ($book);
+               $pictures[]= new Picture($book);
            
           }
+        
+       
+         return  [$books, $pictures];
+
           
-          return $books;
+        
     
     }
 
@@ -98,11 +131,12 @@ class BookManager
     
         $id=(int)$id;
   
-         $req=$this->db->prepare('SELECT id, title, author, state, category, abstract, realiseDate FROM books WHERE id=:id');
+         $req=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.abstractb, B.availability, BP.src  FROM books  AS B INNER JOIN bookPicture AS BP  ON B.id_picture=BP.id WHERE id=:id');
          $req->bindValue('id', $id, PDO::PARAM_INT);
          $req->execute();
          $resul=$req->fetch(PDO::FETCH_ASSOC);
           $categ=ucfirst($resul['category']);
+          $image=new Picture($resul['src']);
          // var_dump($resul);
          
                 return new $categ($resul);

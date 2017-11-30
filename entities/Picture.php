@@ -17,6 +17,20 @@ class Picture
    protected $src;
 
 
+    /*
+        Construct of picture
+      */
+    public function __construct(array $infoPicture)
+  {
+
+  	  $this->hydrater($infoPicture);
+      
+  }
+
+
+
+
+
 
    /**
  * Geter
@@ -51,7 +65,7 @@ class Picture
      * @param \string $src
      *
      */
-    public function setId($src) 
+    public function setSrc($src) 
    {
 		    
 		    if(is_string($src)) 
@@ -65,6 +79,26 @@ class Picture
     }
 
 
+
+  /**
+     * Hydrater
+     *
+     * @param \array infoPicture
+     *
+     */
+ 
+public function hydrater(array $infoPicture)
+{
+	foreach ($infoPicture as $picture=> $value)
+	 {
+		$setters='set'.ucfirst($picture);
+		if(method_exists($this, $setters))
+		{
+			$this->$setters($value);
+		}
+
+	}
+}
 
 
 

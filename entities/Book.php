@@ -1,6 +1,6 @@
 <?php
 
-class Book
+ abstract class  Book
 {
    
 
@@ -28,9 +28,9 @@ class Book
 
 
    /**
-   * @var state type= string
+   * @var availability type= string
    */
-      protected $state;
+      protected $availability;
    
 
 
@@ -66,7 +66,7 @@ class Book
   public function title(){ return $this->title;}
   public function author(){ return $this->author;}
   public function category(){ return $this->category;}
-  public function state(){ return $this->state;}
+  public function availability(){ return $this->availability;}
   public function realiseDate(){ return $this->realiseDate;}
   public function abstractb(){ return $this->abstractb;}
   
@@ -105,6 +105,23 @@ class Book
 		    }  
 		    else {
 		          trigger_error('titre invalide ', E_USER_WARNING);
+		          return;
+		     }
+    }/**
+     * Set abstarctb
+     *
+     * @param \string $abstractb
+     *
+     */
+    public function setAbstractb($abstractb) 
+   {
+		    
+		    if(is_string($abstractb)) 
+		    {
+		    	$this->abstractb=$abstractb;
+		    }  
+		    else {
+		          trigger_error('resumé invalide ', E_USER_WARNING);
 		          return;
 		     }
     }
@@ -146,22 +163,28 @@ class Book
     }
    
  /**
-     * Set state
+     * Set availability
      *
      * @param \string $state
      *
      */
-    public function setState($state) 
+    public function setAvailability($availability) 
    {
-		    
-		    if(is_string($state) and  in_array($state, ["availabe", "borrowed"] )) 
+		  if(is_numeric($availability))  
+		  {  if($availability==0) 
 		    {
-		    	$this->state=$state;
-		    }  
+		    	$this->availability=true;
+		    } 
+		    else{
+		    	  $this->availability=false;
+		    } 
+
+		}
 		    else {
-		          trigger_error('state invalide ', E_USER_WARNING);
+		          trigger_error('disponibilité invalide ', E_USER_WARNING);
 		          return;
 		     }
+
     }
 
     /**
@@ -173,7 +196,7 @@ class Book
     public function setRealiseDate($realiseDate) 
    {
 		    
-		   $this->realiseDate= new DateTime($realiseDate);
+		   $this->realiseDate= $realiseDate;
 		    	
 		   
     }
@@ -192,7 +215,7 @@ public function hydrater(array $infoBook)
 {
 	foreach ($infoBook as $book=> $value)
 	 {
-		$setters='set'.ucfirst($Book);
+		$setters='set'.ucfirst($book);
 		if(method_exists($this, $setters))
 		{
 			$this->$setters($value);
