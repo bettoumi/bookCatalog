@@ -1,5 +1,5 @@
 <?php
-class BookManager
+class BookCatalogManager
 {
 
    protected $db;
@@ -82,34 +82,41 @@ class BookManager
    {
      
  
-       $books=[];
-       $pictures=[];
-       $req=$this->db->query("SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.abstractb, B.availability, BP.src  FROM books  AS B INNER JOIN bookPicture AS BP  ON B.id_picture=BP.id") ;
+       $req=$this->db->query("SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.abstractb, B.availability, B.id_picture, BP.src  FROM books  AS B INNER JOIN bookPicture AS BP  ON B.id_picture=BP.id") ;
      
         $allBooks=$req->fetchAll(PDO::FETCH_ASSOC);
           
-          
-       
-         return  $allBooks;
+          $books=[];
+       //  $pictures=[];
+         foreach ($allBooks as $book )
+        {
+                $categ=ucfirst($book['category']);
+                  $book1= new $categ($book); 
 
+                  $book1->setPicture(new Picture($book));
+                
+                 $books[]=$book1;
+
+           }     
           
-        
+          
+      
+        return    $books;
     
-    }
-
-  /**
-   * Delete book from database
-   */
+  }
+  // /**
+  //  * Delete book from database
+  //  */
    
 
-  public  function deleteBook( $id)
-   {
+  // public  function deleteBook( $id)
+  //  {
        
-     $req= $this->db->prepare('DELETE  FROM books WHERE  id=:id');
-     $req->execute([
-      'id'=>$id] );
+  //    $req= $this->db->prepare('DELETE  FROM books WHERE  id=:id');
+  //    $req->execute([
+  //     'id'=>$id] );
    
-   }
+  //  }
 
 
 /**
@@ -121,18 +128,47 @@ class BookManager
   {
     
         $id=(int)$id;
+         
   
-         $req=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.abstractb, B.availability, BP.src  FROM books  AS B INNER JOIN bookPicture AS BP  ON B.id_picture=BP.id WHERE id=:id');
+         $req=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.availability, B.abstractb, B.id_picture, BP.src  FROM books AS B INNER JOIN bookPicture AS BP ON B.id_picture=BP.id WHERE B.id=:id');
+         $req->bindValue('id', $id, PDO::PARAM_INT);
+         $req->execute();
+
+         $resul=$req->fetch(PDO::FETCH_ASSOC);
+          
+         $categ=ucfirst($resul['category']);
+         $picture=new Picture($resul);
+         // var_dump($picture);
+         $book= new $categ($resul);
+         $book->setPicture($picture);
+          return $book;
+                
+            
+ 
+  } 
+
+
+  /**
+ * [selectPicture ]
+ * @param  [integer] $id 
+ * @return [Picture]       
+ */
+ public function selectPicture($id) 
+  {
+    
+        $id=(int)$id;
+        //var_dump($id);
+  
+         $req=$this->db->prepare('SELECT id, src FROM bookPicture  WHERE id=:id');
          $req->bindValue('id', $id, PDO::PARAM_INT);
          $req->execute();
          $resul=$req->fetch(PDO::FETCH_ASSOC);
-          $categ=ucfirst($resul['category']);
-          $image=new Picture($resul['src']);
-         // var_dump($resul);
+       
+          $image=new Picture($resul);
+             
          
-                return new $categ($resul);
-      
-           
+                return $image;
+             
  
   } 
 
@@ -145,7 +181,7 @@ class BookManager
  public function updateBook(Book $b)
  {
    
-    $req=$this->db->prepare('UPDATE books SET  state=:state WHERE id=:id') ;
+    $req=$this->db->prepare('UPDATE books SET  =: WHERE id=:id') ;
 
       $req->bindValue('id', $b->id(), PDO::PARAM_INT );
       $req->bindValue('state', $b->state(), PDO::PARAM_STR );
@@ -154,6 +190,9 @@ class BookManager
  }
 
 
+
+//   Method of user class
+//   
 
 
 

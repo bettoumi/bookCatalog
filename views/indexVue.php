@@ -36,25 +36,33 @@
   	 </div> -->
 
   	                     <!--  Display   Books -->
-  	 <div class="detailsbook row">
+  	 <div class="detailsbook row justify-content-around mb-5">
   	      <?php 
               foreach ($books as $book) {
-              	     foreach ($pictures as $picture) {
-              	     	
+              	     
+              	            // $picture=$Bookmanager->selectPicture($book->id_picture()) ;       	     	
+              	    
+              	        // var_dump($picture);
               	    
   	      ?>
-  	 	<div class="card col" style="max-width: 15rem;">
-		  <img class="card-img-top fluid " src="<?php echo $picture->src();?>" alt="">
-		  <div class="card-block">
-		    <h4 class="card-title"><?php echo $book->title();?></h4>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="#" class="btn btn-primary">Détail</a>
+  	 	<div class="card  col" style="max-width:10rem ; height: 350px;">
+		  <img class="card-img-top img-fluid h-70" src="<?php echo $book->picture()->src() ;?>" alt="">
+		  <div class="card-block" id="text-card">
+		    <h4 class="card-title">Titre: <?php echo $book->title();?></h4>
+		    <span class="card-text">Auteur:  <?php echo $book->author();?></span>
+		    <span class="card-text">Catégorie: <?php echo $book->category();?></span>
+
+		    <a href="bookDetail.php?id=<?php echo $book->id(); ?> " class="btn" id="button3">Détail</a>
+		       <form action="" method="post">
+                <input type="hidden" name="idbook" value="">
+		       <input type="submit" name="" value="">
+		     </form>
 		  </div>
 		</div>
 
 
 		  <?php
-		}}
+		}
 
 		  ?>
   	 </div>

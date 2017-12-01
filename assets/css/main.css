@@ -166,7 +166,7 @@ textarea {
   {
     border:none;
   }
-  #buton, #buton2
+  #buton, #buton2, #button3
   {
     color:rgb(230,69,59);
     
@@ -174,7 +174,7 @@ textarea {
    font-family: 'Crimson Text', sans-serif;
 
   }
-  #buton:hover, #buton2:hover
+  #buton:hover, #buton2:hover, #button3:hover
   {
     border-color:rgb(230,69,59);
   }
@@ -197,6 +197,24 @@ textarea {
   {
     background-color: none;
     color:black;
+  }
+  .col
+  {
+    padding: 0px;
+  }
+
+  .card-img-top
+  {
+    height: 200px;
+  }
+  #text-card
+  {
+    font-size: 15px;
+    font-family:  'Crimson Text', sans-serif;
+  }
+  .card
+  {
+    border:none;
   }
 
   .footer

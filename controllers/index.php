@@ -3,7 +3,7 @@
 require '../model/dbconnexion/dbconnexion.php';
 require '../model/bookManager.php';
 $bd=connex_bdd();
-$Bookmanager= new BookManager($bd);
+$Bookmanager= new BookCatalogManager($bd);
 
  function loadclass($class)
 {
@@ -98,19 +98,25 @@ spl_autoload_register('loadclass');
  * 
  */
   
-    $allBooks= $Bookmanager->selecAllBook() ;
-      
-       $books=[];
-       $pictures=[];
-       foreach ($allBooks as $book )
-       {
-               $categ=ucfirst($book['category']);
+    	$books= $Bookmanager->selecAllBook() ;
+      // //ar_dump($allBooks);
+      //  $allbooks=[];
+      //  $pictures=[];
+      //  foreach ($allBooksPictures as $bookPicture )
+      //  {
+      //          $categ=ucfirst($bookPicture['category']);
                      
-               $books[]=new $categ($book);
-               $pictures[]= new Picture($book);
+      //          $allbooks[]=new $categ($bookPicture);
+      //          $pictures[]= new Picture($bookPicture);
+
            
-        }
+      //   }
+        // var_dump($allbooks);
+        // var_dump($pictures);
         
+
+        // var_dump($pictures);
+
 
     
    
@@ -120,6 +126,7 @@ spl_autoload_register('loadclass');
 
 
 include "../views/indexVue.php";
+
  ?>
 
 
