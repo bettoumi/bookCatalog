@@ -29,7 +29,7 @@ class BookCatalogManager
     * Add book in data base
     * @param  Book $b
     */
-    public function addBook(Book $b, $idpicture)
+    public function addBook(Book $b)
    {   
           
       
@@ -43,7 +43,7 @@ class BookCatalogManager
         $req->bindValue('category', $b->category(),PDO::PARAM_STR);
         $req->bindValue('abstractb', $b->abstractb(),PDO::PARAM_STR);
         $req->bindValue('realiseDate', $b->realiseDate());
-        $req->bindValue('id_picture', $idpicture, PDO::PARAM_INT);
+        $req->bindValue('id_picture', $b->id_picture(), PDO::PARAM_INT);
         $req->execute();
         //return $this->db->lastInsertId();
     
@@ -121,9 +121,12 @@ class BookCatalogManager
  * @param  [integer] $id 
  * @return [book]       
  */
- public function selectBook($id) 
+ public function selectBook($info) 
   {
     
+      if( is_int($info))
+     {
+        $id=(int)$info;
         $id=(int)$id;
          
   
@@ -139,7 +142,34 @@ class BookCatalogManager
          $book= new $categ($resul);
          $book->setPicture($picture);
           return $book;
-                
+         }
+
+       else {
+         
+        
+        $books=[];
+        $req2=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.availability, B.abstractb, B.id_picture, BP.src  FROM books AS B INNER JOIN bookPicture AS BP ON B.id_picture=BP.id WHERE B.category=:category') ;
+        $req2->bindValue('category', $info, PDO::PARAM_STR);
+       $req2->execute();
+      $resul=$req2->fetchALL(PDO::FETCH_ASSOC);
+        // var_dump($resul);
+               
+        // var_dump($resul);
+        foreach ($resul as $book ) {
+            $categ=ucfirst($book['category']);
+                 $book1= new $categ($book); 
+
+                  $book1->setPicture(new Picture($book));
+                  $books[]=$book1;
+        }
+         
+          return $books;
+        }  
+
+           
+          
+
+
             
  
   } 

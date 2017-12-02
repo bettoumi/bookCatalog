@@ -1,10 +1,10 @@
    <!--  Add Book form -->
 
 <div class="d-flex flex-column justify-content-center">
-	 <a class="btn    align-self-center mb-2" data-toggle="collapse" href="#collapseExample" id="buton" aria-expanded="false" aria-controls="collapseExample">Ajouter un livre
-	 </a>
+	 <h3 class="btn  align-self-center mb-2"  id="buton">Ajouter un livre
+	 </h3>
 
- <div class="collapse " id="collapseExample">
+ 
   <div class="card card-block" id="addbolc">
     
  <div class="container-fluid">
@@ -70,5 +70,4 @@
 
 
   </div>
-</div>
-</div>
+</div> 

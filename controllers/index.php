@@ -90,7 +90,8 @@ spl_autoload_register('loadclass');
                  
 				  $book=new $nameclass($bookInfo);
 				  
-			      $Bookmanager->addBook($book, $idpicture);
+			      $Bookmanager->addBook($book);
+			       header('Location:');
 			   
 
    }  
@@ -103,26 +104,27 @@ spl_autoload_register('loadclass');
  * Recive all book from dtat base
  * 
  */
+    if(isset($_POST['selectbook']) )
+
+		   {  //var_dump($_POST);
+		    if(in_array($_POST['selectbook'],['comic','hobbies', 'novel' ] ))
+		    {
+			 $books=$Bookmanager->selectBook($_POST['selectbook']);}
+		     
+			else
+			{
+				 $books=$Bookmanager->selecAllBook();
+			}
+
+		   // header('Location: '. $_SERVER[HTTP_REFERER]);
+		} else{
+			 $books=$Bookmanager->selecAllBook() ;}
+
+
+
   
-    	$books= $Bookmanager->selecAllBook() ;
-      // //ar_dump($allBooks);
-      //  $allbooks=[];
-      //  $pictures=[];
-      //  foreach ($allBooksPictures as $bookPicture )
-      //  {
-      //          $categ=ucfirst($bookPicture['category']);
-                     
-      //          $allbooks[]=new $categ($bookPicture);
-      //          $pictures[]= new Picture($bookPicture);
-
-           
-      //   }
-        // var_dump($allbooks);
-        // var_dump($pictures);
-        
-
-        // var_dump($pictures);
-
+    	
+      
 
     
    
