@@ -280,7 +280,7 @@
     }
 
     /**
-     * Set picture
+     * Set user
      *
      * @param \User $user
      *

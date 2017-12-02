@@ -14,9 +14,9 @@ spl_autoload_register('loadclass');
 
 
 /**
- *  information  add book in data base 
+ *   add book in data base 
  *
- *
+ 
  ** 
  */   
 
@@ -34,16 +34,7 @@ spl_autoload_register('loadclass');
       {              
 	     
             
-	       $nameclass=ucfirst(htmlspecialchars($_POST['category']));
-
-
-	         $bookInfo=['title'=>htmlspecialchars($_POST['title']),
-                 'author'=>htmlspecialchars($_POST['author']),
-                 'realiseDate'=>htmlspecialchars($_POST['realiseDate']),
-                 'category'=>htmlspecialchars($_POST['category']),
-                  'abstractb'=>htmlspecialchars($_POST['abstract'])
-					 ];
-
+	       
 	        /**
 	         * Image information
 	         */
@@ -81,9 +72,24 @@ spl_autoload_register('loadclass');
                  $infopicture=['src'=>$src
                                 ]; 
                   $picture= new Picture($infopicture);
-                  $idpicture=$Bookmanager->addPicture($picture);
+                  $id_picture=$Bookmanager->addPicture($picture);
+
+                 $nameclass=ucfirst(htmlspecialchars($_POST['category']));
+
+
+	             $bookInfo=['title'=>htmlspecialchars($_POST['title']),
+                 'author'=>htmlspecialchars($_POST['author']),
+                 'realiseDate'=>htmlspecialchars($_POST['realiseDate']),
+                 'category'=>htmlspecialchars($_POST['category']),
+                  'abstractb'=>htmlspecialchars($_POST['abstract']),
+					 'id_picture'=>$id_picture];
+
+
+
+
                  
 				  $book=new $nameclass($bookInfo);
+				  
 			      $Bookmanager->addBook($book, $idpicture);
 			   
 

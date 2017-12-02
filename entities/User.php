@@ -19,6 +19,19 @@ class User
    protected $adresse;
 
 
+   /**
+   * @var book type= Book
+   */
+   protected $book;
+   
+
+   /**
+   * @var bookcollection array of Book
+   */
+   protected $bookCollection;
+   
+
+
   /*
         Construct of User
       */
@@ -40,6 +53,8 @@ class User
   public function id(){ return $this->id;}
   public function name(){ return $this->name;}
   public function adresse(){ return $this->adresse;}
+  public function book(){ return $this->book;}
+  public function bookCollection(){ return $this->bookCollection;}
 
 /**
      * Set id
@@ -88,15 +103,38 @@ class User
      */
     public function setAdresse($adresse) 
    {
+        
+        if(is_string($adresse)) 
+        {
+          $this->adresse=$adresse;
+        }  
+        else {
+              trigger_error('Adresse  invalide ', E_USER_WARNING);
+              return;
+         }
+    }
+    /**
+     * Set book
+     *
+     * @param \Book $book
+     *
+     */
+    public function setBook(Book $book) 
+   {
+        
+        $this->book=$book;
+    }
+
+    /**
+     * Set bookCollection;
+     *
+     * @param \array of Book
+     *
+     */
+    public function setBookCollection(array $bookCollection) 
+   {
 		    
-		    if(is_string($adresse)) 
-		    {
-		    	$this->adresse=$adresse;
-		    }  
-		    else {
-		          trigger_error('Adresse  invalide ', E_USER_WARNING);
-		          return;
-		     }
+		    $this->bookCollection=$bookCollection;;
     }
 
 

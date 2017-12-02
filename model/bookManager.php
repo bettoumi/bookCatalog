@@ -32,14 +32,7 @@ class BookCatalogManager
     public function addBook(Book $b, $idpicture)
    {   
           
-       // var_dump($b);
-       var_dump($b->title());
-       var_dump($b->author());
-       var_dump($b->category());
-       var_dump($b->abstractb());
-       var_dump($idpicture);
-
-
+      
 
         $req=$this->db->prepare('INSERT INTO books(title, author, category, abstractb, realiseDate, id_picture) VALUES(:title, :author,  :category, :abstractb, :realiseDate, :id_picture)');
        
@@ -55,7 +48,11 @@ class BookCatalogManager
         //return $this->db->lastInsertId();
     
 
-  }  /**
+  } 
+
+
+
+   /**
     * Add image in data base
     * @param  Picture $P
     * @return last id (integer)
@@ -192,9 +189,72 @@ class BookCatalogManager
 
 
 //   Method of user class
-//   
+// --------------------------------------------------------------------------  
+   
+    /**
+    * Add user in data base
+    * @param  User  $U
+    */
+    public function addUser(User $u)
+   {   
+          
+       if(!$this->existUser($u))
+
+       {  var_dump($u);
+        $req=$this->db->prepare('INSERT INTO users(name, adresse) VALUES(:name, :adresse)');
+
+        $req->bindValue('name', $u->name(), PDO::PARAM_STR );
+        $req->bindValue('adresse', $u->adresse(), PDO::PARAM_STR);
+        $req->execute();
+       
+      }
+
+  }
 
 
+   /**
+    * techeque  user  exist in data base
+    * @param  User  $U
+    */
+  public function existUser(User $u)
+{
+  $req=$this->db->prepare('SELECT COUNT(*)  FROM  users WHERE name =:name and adresse=:adresse');
+    $req->execute([
+      'name'=> $u->name(),
+      'adresse'=> $u->adresse()]
+      );
+    
+    return $req->fetchColumn()>0;
+   
+}
+
+
+
+ public function allUser() 
+   {
+     
+ 
+       $req=$this->db->query("SELECT id, name, adresse FROM users  ") ;
+         
+       $allusers=$req->fetchAll(PDO::FETCH_ASSOC);
+          $users=[];
+      
+         foreach ($allusers as $user )
+        {
+                  
+                  $users[]= new User($user);
+         
+
+        }     
+                 
+      
+        return    $users;
+    
+  }
+
+
+  
+                  
 
 
 

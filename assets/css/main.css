@@ -217,6 +217,12 @@ textarea {
     border:none;
   }
 
+#userscard
+{
+
+   margin-left: 0px;
+}
+
   .footer
   {
     color:rgb(230,69,59);
