@@ -40,7 +40,7 @@ spl_autoload_register('loadclass');
  * All users from data base
  */
 
-$users= $bookManager->allUser() ;
+$users= $bookManager->allUsers() ;
 
 
 

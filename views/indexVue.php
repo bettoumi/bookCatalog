@@ -54,16 +54,27 @@
         <p class="card-text">Catégorie: <?php echo $book->category();?></p>
 		    <!-- <p class="card-text">disponibilité: <?php// echo $book->availability();?></p> -->
 
-        <?php if(! $book->borrowed()) 
-            {  ?><p class="card-text">disponibilité:<strong>non disponible</strong></p> 
+        <?php if($book->borrowed()) 
+            {  ?><p class="card-text">disponibilité:<strong> non dispo</strong></p> 
+                   <!-- change the state of book  -->
+                  <form action=""  method="post">
+                       <input type="hidden" name="idbook" value="<?php echo $book->id(); ?>">
+                      <input type="submit" name="returnedBook" value="Retourlivre">
+                  </form>
             <?php }
-               else { ?>
-              <form action="" method="post">
-                <input type="hidden" name="idbook" value="<?php echo $book->id();?>">
-                  <input type="submit"  class="btn"  id="button4" name="toBorrowed" value="preter">
-             </form>
+               else { 
+                   ?>
+                <p class="card-text">disponibilité:<strong> dispo</strong></p> 
+                <button type="button" class="btn " data-toggle="modal" data-target="#borrowedModal<?php echo $book->id(); ?>">
+
+                          emprunter
+                 </button>
+
+             
              <?php
-             }
+                 include 'includes/borrowedBookModal.php' ;
+
+               }
              ?>
             
 		    <a href="bookDetail.php?id=<?php echo $book->id(); ?> " class="btn" id="button3">Détail</a>

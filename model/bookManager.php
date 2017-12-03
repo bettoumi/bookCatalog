@@ -84,16 +84,17 @@ class BookCatalogManager
         ") ;
      
         $allBooks=$req->fetchAll(PDO::FETCH_ASSOC);
-          var_dump($allBooks);
+         
           $books=[];
        //  $pictures=[];
          foreach ($allBooks as $book )
         {
                 $categ=ucfirst($book['category']);
                   $book1= new $categ($book); 
-
-                  $book1->setPicture(new Picture($book));
-                  $book1->setUser(new User($book));
+                  if($book['id_picture']!==NULL)
+                 { $book1->setPicture(new Picture($book));}
+                  if( $book['id_user']!==NULL)
+                    {$book1->setUser(new User($book));}
                 
                  $books[]=$book1;
 
@@ -183,6 +184,33 @@ class BookCatalogManager
   } 
 
 
+
+  /**
+ * updte book 
+ * @param  book $b [
+ * 
+ */
+
+ public function updateBook(Book $b)
+ {
+      var_dump($b->borrowed());
+      var_dump($b->id());
+      var_dump($b->id_user());
+   
+    $req=$this->db->prepare('UPDATE books SET  borrowed=:borrowed, id_user=:id_user WHERE id=:id') ;
+   
+      $req->bindValue('id', $b->id(), PDO::PARAM_INT );
+      $req->bindValue('id_user', $b->id_user() );
+      $req->bindValue('borrowed', $b->borrowed());
+      $req->execute();
+
+ }
+
+
+
+
+
+
   /**
  * [selectPicture ]
  * @param  [integer] $id 
@@ -207,22 +235,7 @@ class BookCatalogManager
  
   } 
 
-/**
- * updte book 
- * @param  book $b [
- * 
- */
 
- public function updateBook(Book $b)
- {
-   
-    $req=$this->db->prepare('UPDATE books SET  borrowed=:borrowed WHERE id=:id') ;
-
-      $req->bindValue('id', $b->id(), PDO::PARAM_INT );
-      $req->bindValue('borrowed', $b->borrowed(), PDO::PARAM_STR );
-      $req->execute();
-
- }
 
 
 
@@ -268,7 +281,7 @@ class BookCatalogManager
 
 
 
- public function allUser() 
+ public function allUsers() 
    {
      
  

@@ -262,7 +262,7 @@
    {
           $id_user=(int)$id_user;
 
-		    if(is_int($id_user))
+		    if(is_int($id_user)or is_null($id_user))
 		   {$this->id_user= $id_user;}
 		     else {
 		          trigger_error('id_user invalide ', E_USER_WARNING);

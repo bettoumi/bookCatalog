@@ -91,7 +91,7 @@ spl_autoload_register('loadclass');
 				  $book=new $nameclass($bookInfo);
 				  
 			      $bookManager->addBook($book);
-			       header('Location:');
+			       
 			   
 
    }
@@ -100,26 +100,48 @@ spl_autoload_register('loadclass');
    	     /*
    	        update book if it is borrowed
    	      */
-   	  if( isset($_POST['toBorrowed']) AND  isset($_POST['idbook']) AND !empty($_POST['idbook'] ))
+   	  if( isset($_POST['toBorrowed']) AND  isset($_POST['idbook']) AND !empty($_POST['idbook'] ) and isset($_POST['userid']) AND !empty($_POST['userid'] ))
      	
           {
            
              
-             $book=$bookManager->selectBook(htmlspecialchars($_POST['idbook']));
+             $book=$bookManager->selectBook((int)htmlspecialchars($_POST['idbook']));
+
+             $book->setBorrowed(true);
+             $book->setId_user((int)htmlspecialchars($_POST['userid']));
+
              $bookManager->updateBook($book);
 
           }
+
+            /**
+           	 * update book if it is returned
+           	 */
+           else{
+           	    if ( isset($_POST['returnedBook']) AND  isset($_POST['idbook']) AND !empty($_POST['idbook'] ))
+     	              
+          			{ // var_dump($_POST);
+                		$book=$bookManager->selectBook((int)htmlspecialchars($_POST['idbook']));
+                          
+             			$book->setBorrowed(false);
+             			$book->setId_user(Null);
+             			 // var_dump($book);
+             			$bookManager->updateBook($book);
+
+                          
+                   }
+           	    }
          
+}
 
-
-     }  
+      
 			    
 			    
 			     
 
 
 /**
- * Recive all book from dtat base
+ * Recive all book from data base
  * 
  */
     if(isset($_POST['selectbook']) )
@@ -139,7 +161,11 @@ spl_autoload_register('loadclass');
 			 $books=$bookManager->selecAllBook() ;}
 
 
-
+/**
+ * Recive all users from data base
+ * 
+ */
+$users=$bookManager-> allUsers() ;
   
     	
       
