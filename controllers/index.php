@@ -3,7 +3,7 @@
 require '../model/dbconnexion/dbconnexion.php';
 require '../model/bookManager.php';
 $bd=connex_bdd();
-$Bookmanager= new BookCatalogManager($bd);
+$bookManager= new BookCatalogManager($bd);
 
  function loadclass($class)
 {
@@ -72,7 +72,7 @@ spl_autoload_register('loadclass');
                  $infopicture=['src'=>$src
                                 ]; 
                   $picture= new Picture($infopicture);
-                  $id_picture=$Bookmanager->addPicture($picture);
+                  $id_picture=$bookManager->addPicture($picture);
 
                  $nameclass=ucfirst(htmlspecialchars($_POST['category']));
 
@@ -90,11 +90,29 @@ spl_autoload_register('loadclass');
                  
 				  $book=new $nameclass($bookInfo);
 				  
-			      $Bookmanager->addBook($book);
+			      $bookManager->addBook($book);
 			       header('Location:');
 			   
 
-   }  
+   }
+   else {
+
+   	     /*
+   	        update book if it is borrowed
+   	      */
+   	  if( isset($_POST['toBorrowed']) AND  isset($_POST['idbook']) AND !empty($_POST['idbook'] ))
+     	
+          {
+           
+             
+             $book=$bookManager->selectBook(htmlspecialchars($_POST['idbook']));
+             $bookManager->updateBook($book);
+
+          }
+         
+
+
+     }  
 			    
 			    
 			     
@@ -109,16 +127,16 @@ spl_autoload_register('loadclass');
 		   {  //var_dump($_POST);
 		    if(in_array($_POST['selectbook'],['comic','hobbies', 'novel' ] ))
 		    {
-			 $books=$Bookmanager->selectBook($_POST['selectbook']);}
+			 $books=$bookManager->selectBook($_POST['selectbook']);}
 		     
 			else
 			{
-				 $books=$Bookmanager->selecAllBook();
+				 $books=$bookManager->selecAllBook();
 			}
 
 		   // header('Location: '. $_SERVER[HTTP_REFERER]);
 		} else{
-			 $books=$Bookmanager->selecAllBook() ;}
+			 $books=$bookManager->selecAllBook() ;}
 
 
 

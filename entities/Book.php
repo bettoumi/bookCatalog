@@ -30,7 +30,7 @@
    /**
    * @var availability type= string
    */
-      protected $availability;
+      protected $borrowed;
    
 
 
@@ -93,7 +93,7 @@
   public function title(){ return $this->title;}
   public function author(){ return $this->author;}
   public function category(){ return $this->category;}
-  public function availability(){ return $this->availability;}
+  public function borrowed(){ return $this->borrowed;}
   public function realiseDate(){ return $this->realiseDate;}
   public function abstractb(){ return $this->abstractb;}
   public function id_picture(){ return $this->id_picture;}
@@ -200,22 +200,14 @@
      * @param \string $state
      *
      */
-    public function setAvailability($availability) 
+    public function setBorrowed($borrowed) 
    {
-		  if(is_numeric($availability))  
-		  {  if($availability==0) 
-		    {
-		    	$this->availability=true;
-		    } 
-		    else{
-		    	  $this->availability=false;
-		    } 
-
-		}
-		    else {
-		          trigger_error('disponibilité invalide ', E_USER_WARNING);
-		          return;
-		     }
+		   $this->borrowed=$borrowed;
+		// }
+		//     else {
+		//           trigger_error('disponibilité invalide ', E_USER_WARNING);
+		//           return;
+		//      }
 
     }
 

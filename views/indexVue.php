@@ -11,7 +11,8 @@
       ?>
    </div>
       <!-- display all of book -->
-  <div class="allbook col-12 col-md-9 col-lg-9">
+  <div class="allbook col-12 col-md-9 col-lg-9  pb-5 mb-5">
+
                              <!--  Select category of books -->
   	  <div class="selectbook d-flex flex-column justify-content-center mb-5">
          <h2 class="align-self-center">Livres</h2>
@@ -42,9 +43,7 @@
   	      <?php 
               foreach ($books as $book) {
               	     
-              	            // $picture=$Bookmanager->selectPicture($book->id_picture()) ;       	     	
-              	    
-              	        // var_dump($picture);
+              	            
               	    
   	      ?>
   	 	<div class="card  col" style="max-width:15rem ; height: 350px;">
@@ -52,13 +51,23 @@
 		  <div class="card-block" id="text-card">
 		    <h4 class="card-title">Titre: <?php echo $book->title();?></h4>
 		    <p class="card-text">Auteur:  <?php echo $book->author();?></p>
-		    <p class="card-text">Catégorie: <?php echo $book->category();?></p>
+        <p class="card-text">Catégorie: <?php echo $book->category();?></p>
+		    <!-- <p class="card-text">disponibilité: <?php// echo $book->availability();?></p> -->
 
+        <?php if(! $book->borrowed()) 
+            {  ?><p class="card-text">disponibilité:<strong>non disponible</strong></p> 
+            <?php }
+               else { ?>
+              <form action="" method="post">
+                <input type="hidden" name="idbook" value="<?php echo $book->id();?>">
+                  <input type="submit"  class="btn"  id="button4" name="toBorrowed" value="preter">
+             </form>
+             <?php
+             }
+             ?>
+            
 		    <a href="bookDetail.php?id=<?php echo $book->id(); ?> " class="btn" id="button3">Détail</a>
-		       <form action="" method="post">
-                <input type="hidden" name="idbook" value="">
-		       <input type="submit" name="" value="">
-		     </form>
+		    
 		  </div>
 		</div>
 

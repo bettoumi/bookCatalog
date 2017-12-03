@@ -79,10 +79,12 @@ class BookCatalogManager
    {
      
  
-       $req=$this->db->query("SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.abstractb, B.availability, B.id_picture, BP.src  FROM books  AS B INNER JOIN bookPicture AS BP  ON B.id_picture=BP.id") ;
+       $req=$this->db->query("SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.abstractb, B.borrowed, B.id_picture, BP.src,  B.id_user, U.name  FROM books  AS B LEFT JOIN bookPicture AS BP  ON B.id_picture=BP.id
+                  LEFT JOIN users AS U   ON B.id_user=U.id
+        ") ;
      
         $allBooks=$req->fetchAll(PDO::FETCH_ASSOC);
-          
+          var_dump($allBooks);
           $books=[];
        //  $pictures=[];
          foreach ($allBooks as $book )
@@ -91,6 +93,7 @@ class BookCatalogManager
                   $book1= new $categ($book); 
 
                   $book1->setPicture(new Picture($book));
+                  $book1->setUser(new User($book));
                 
                  $books[]=$book1;
 
@@ -130,7 +133,9 @@ class BookCatalogManager
         $id=(int)$id;
          
   
-         $req=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.availability, B.abstractb, B.id_picture, BP.src  FROM books AS B INNER JOIN bookPicture AS BP ON B.id_picture=BP.id WHERE B.id=:id');
+         $req=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.borrowed, B.abstractb, B.id_picture, BP.src  FROM books AS B INNER JOIN bookPicture AS BP ON B.id_picture=BP.id
+                                
+          WHERE B.id=:id');
          $req->bindValue('id', $id, PDO::PARAM_INT);
          $req->execute();
 
@@ -138,9 +143,11 @@ class BookCatalogManager
           
          $categ=ucfirst($resul['category']);
          $picture=new Picture($resul);
+         $user=new User($resul);
          // var_dump($picture);
          $book= new $categ($resul);
          $book->setPicture($picture);
+         $book->setUser($user);
           return $book;
          }
 
@@ -148,7 +155,7 @@ class BookCatalogManager
          
         
         $books=[];
-        $req2=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.availability, B.abstractb, B.id_picture, BP.src  FROM books AS B INNER JOIN bookPicture AS BP ON B.id_picture=BP.id WHERE B.category=:category') ;
+        $req2=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.borrowed, B.abstractb, B.id_picture, BP.src  FROM books AS B INNER JOIN bookPicture AS BP ON B.id_picture=BP.id WHERE B.category=:category') ;
         $req2->bindValue('category', $info, PDO::PARAM_STR);
        $req2->execute();
       $resul=$req2->fetchALL(PDO::FETCH_ASSOC);
@@ -160,6 +167,7 @@ class BookCatalogManager
                  $book1= new $categ($book); 
 
                   $book1->setPicture(new Picture($book));
+                  $book1->setUser(new User($book));
                   $books[]=$book1;
         }
          
@@ -208,10 +216,10 @@ class BookCatalogManager
  public function updateBook(Book $b)
  {
    
-    $req=$this->db->prepare('UPDATE books SET  =: WHERE id=:id') ;
+    $req=$this->db->prepare('UPDATE books SET  borrowed=:borrowed WHERE id=:id') ;
 
       $req->bindValue('id', $b->id(), PDO::PARAM_INT );
-      $req->bindValue('state', $b->state(), PDO::PARAM_STR );
+      $req->bindValue('borrowed', $b->borrowed(), PDO::PARAM_STR );
       $req->execute();
 
  }
