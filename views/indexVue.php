@@ -5,13 +5,13 @@
  <div class="principalsection row mt-5">
 
     <!-- Form add of book -->
-  <div class="addbook col-12 col-md-3 col-lg-3">
+  <div class="addbook col-12 col-md-12 col-lg-3">
       <?php
         include("includes/addbook.php")   	
       ?>
    </div>
       <!-- display all of book -->
-  <div class="allbook col-12 col-md-9 col-lg-9 mx-auto  pb-5 mb-5">
+  <div class="allbook col-12 col-md-12 col-lg-9 mx-auto  pb-5 mb-5">
 
                              <!--  Select category of books -->
   	  <div class="selectbook d-flex flex-column justify-content-center mb-5">
@@ -46,9 +46,9 @@
               	            
               	    
   	      ?>
-  	 	<div class="card  col" style="max-width:25rem ; height: 350px;" id="carbook">
+  	 	<div class="card  col" style="max-width:25rem ; " id="carbook">
 		  <img class="card-img-top img-fluid h-70" style="max-width:10rem" src="<?php echo $book->picture()->src() ;?>" alt="">
-		  <div class="card-block" id="text-card">
+		  <div class="card-block mb-5 pb-5" id="text-card">
 		    <h4 class="card-title">Titre: <?php echo $book->title();?></h4>
 		    <p class="card-text">Auteur:  <?php echo $book->author();?></p>
         <p class="card-text">Catégorie: <?php echo $book->category();?></p>
@@ -83,7 +83,7 @@
 
                }
              ?>
-          <p>  
+          <p class="mb-5">  
 		          <a href="bookDetail.php?id=<?php echo $book->id(); ?> " class="btn" id="button3">Détail</a>
 		    </p>
 		  </div>
