@@ -32,14 +32,14 @@
                else { 
                    ?>
                 <p class="card-text"><strong class="nondispo"> disponible</strong></p> 
-                <button type="button" class="btn"  id="button6" data-toggle="modal" data-target="#borrowedModal<?php echo $book->id(); ?>">
+                <button type="button" class="btn"  id="button6" data-toggle="modal" data-target="#borroweddetail<?php echo $book->id();?>">
 
                           Emprunter
                  </button>
 
              
              <?php
-                 require 'includes/borrowedBookModal.php' ;
+                 include 'includes/detailBookModal.php' ;
 
                }
              ?>

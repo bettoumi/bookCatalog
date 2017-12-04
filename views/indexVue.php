@@ -58,7 +58,7 @@
              {   //var_dump($book->user());
               ?><p class="card-text"><strong class="nondispo"> non disponible</strong></p>
                      
-               <p class="card-text">Emprunté par:<strong class="nomuser"><?php echo $book->user()->name() ;?></strong></p>
+               <p class="card-text">numéro utilisataur:<strong class="nomuser"><?php echo $book->user()->id() ;?></strong></p>
               
 
 
