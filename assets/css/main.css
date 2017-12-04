@@ -149,7 +149,7 @@ body
     background-size: cover;
     height: 200px;
     width: 800px;
-    border:1px solid red;
+    /*border:1px solid red;*/
     color:rgb(253,254,246);
     
 
@@ -178,7 +178,9 @@ body
    font-family: 'Crimson Text', sans-serif;
 
   }
-  #buton:hover, #buton2:hover, #button3:hover
+  
+  
+  #buton:hover, #buton2:hover, #button3:hover, #button5 
   {
     border-color:rgb(230,69,59);
   }
@@ -231,6 +233,10 @@ body
   .nondispo
   {
     color:red;
+  }
+  .nomuser
+  {
+    color:rgb(175,169,81);
   }
 
 #userscard

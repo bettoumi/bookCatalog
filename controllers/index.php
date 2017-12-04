@@ -90,7 +90,8 @@ spl_autoload_register('loadclass');
                  
 				  $book=new $nameclass($bookInfo);
 				    // var_dump($book);
-			      $bookManager->addBook($book);            
+			      $bookManager->addBook($book);   
+			      header('Location:');         
 			     
 			   
 
@@ -107,7 +108,7 @@ spl_autoload_register('loadclass');
              
              $book=$bookManager->selectBook((int)htmlspecialchars($_POST['idbook']));
 
-             $book->setBorrowed(true);
+             $book->setBorrowed(1);
              $book->setId_user((int)htmlspecialchars($_POST['userid']));
 
              $bookManager->updateBook($book);
@@ -128,7 +129,7 @@ spl_autoload_register('loadclass');
              			 // var_dump($book);
              			$bookManager->updateBook($book);
 
-                          //header('Location:');
+                          
                           
                    }
            	   

@@ -46,7 +46,7 @@ class BookCatalogManager
         $req->bindValue('realiseDate', $b->realiseDate(), PDO::PARAM_STR);
         $req->bindValue('id_picture', (int)$b->id_picture(), PDO::PARAM_INT);
         $req->execute();
-         var_dump($req->execute());
+        
         //return $this->db->lastInsertId();
     
 
@@ -107,39 +107,30 @@ class BookCatalogManager
         return    $books;
     
   }
-  // /**
-  //  * Delete book from database
-  //  */
-   
-
-  // public  function deleteBook( $id)
-  //  {
-       
-  //    $req= $this->db->prepare('DELETE  FROM books WHERE  id=:id');
-  //    $req->execute([
-  //     'id'=>$id] );
-   
-  //  }
+ 
 
 
 /**
  * [selectBooks ]
- * @param  [integer] $id 
- * @return [book]       
+ * @param  [integer][string] $info
+ * @return books or book      
  */
  public function selectBook($info) 
   {
-    
+     
       if( is_int($info))
      {
         $id=(int)$info;
         $id=(int)$id;
-         
+           
+          
+      
   
-         $req=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.borrowed, B.abstractb, B.id_picture, BP.src  FROM books AS B INNER JOIN bookPicture AS BP ON B.id_picture=BP.id
+         $req=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category,  B.abstractb, B.borrowed, B.id_picture, BP.src,  B.id_user, U.name  FROM books  AS B LEFT JOIN bookPicture AS BP  ON B.id_picture=BP.id
+                      LEFT JOIN users AS U   ON B.id_user=U.id
                                 
-          WHERE B.id=:id');
-         $req->bindValue('id', $id, PDO::PARAM_INT);
+                      WHERE B.id='.$id);
+         // $req->bindValue('id', $id, PDO::PARAM_INT);
          $req->execute();
 
          $resul=$req->fetch(PDO::FETCH_ASSOC);
@@ -156,13 +147,14 @@ class BookCatalogManager
 
        else {
          
-        
+         
         $books=[];
-        $req2=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.borrowed, B.abstractb, B.id_picture, BP.src  FROM books AS B INNER JOIN bookPicture AS BP ON B.id_picture=BP.id WHERE B.category=:category') ;
+        $req2=$this->db->prepare('SELECT B.id, B.title, B.author, B.realiseDate, B.category, B.borrowed, B.abstractb, B.id_picture, BP.src,  B.id_user, U.name  FROM books  AS B LEFT JOIN bookPicture AS BP  ON B.id_picture=BP.id
+                   LEFT JOIN users AS U   ON B.id_user=U.id WHERE B.category=:category') ;
         $req2->bindValue('category', $info, PDO::PARAM_STR);
        $req2->execute();
-      $resul=$req2->fetchALL(PDO::FETCH_ASSOC);
-        // var_dump($resul);
+        $resul=$req2->fetchALL(PDO::FETCH_ASSOC);
+        
                
         // var_dump($resul);
         foreach ($resul as $book ) {
@@ -171,10 +163,12 @@ class BookCatalogManager
 
                   $book1->setPicture(new Picture($book));
                   $book1->setUser(new User($book));
+                  // var_dump($book1->user()->name());
                   $books[]=$book1;
         }
          
           return $books;
+
         }  
 
            

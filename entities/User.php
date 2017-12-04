@@ -85,7 +85,7 @@ class User
     public function setName($name) 
    {
 		    
-		    if(is_string($name)) 
+		    if(is_string($name)or ($name===NULL)) 
 		    {
 		    	$this->name=$name;
 		    }  

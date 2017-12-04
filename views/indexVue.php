@@ -11,7 +11,7 @@
       ?>
    </div>
       <!-- display all of book -->
-  <div class=" allbook col-12 col-md-9 col-lg-9  pb-5 mb-5">
+  <div class="allbook col-12 col-md-9 col-lg-9 mx-auto  pb-5 mb-5">
 
                              <!--  Select category of books -->
   	  <div class="selectbook d-flex flex-column justify-content-center mb-5">
@@ -39,7 +39,7 @@
   	 </div> 
  
   	                     <!--  Display   Books -->
-  	 <div class="detailsbook row justify-content-around mb-5">
+  	 <div class="detailsbook row justify-content-around mb-5 pb-5">
   	      <?php 
               foreach ($books as $book) {
               	     
@@ -55,22 +55,24 @@
 		    <!-- <p class="card-text">disponibilité: <?php// echo $book->availability();?></p> -->
 
         <?php if($book->borrowed()) 
-            {  ?><p class="card-text">disponibilité:<strong class="nondispo"> non dispo</strong></p>
-              </p>
-               <p class="card-text">Emprunté par:<strong class="nondispo"><?php echo $book->user()->name() ;?></strong></p>
-              </p>
+             {   //var_dump($book->user());
+              ?><p class="card-text"><strong class="nondispo"> non disponible</strong></p>
+                     
+               <p class="card-text">Emprunté par:<strong class="nomuser"><?php echo $book->user()->name() ;?></strong></p>
+              
 
 
-                   <!-- change the state of book  -->
+                  <p> <!-- change the state of book  -->
                   <form action=""  method="post">
                        <input type="hidden" name="idbook" value="<?php echo $book->id(); ?>">
                       <input type="submit" name="returnedBook" value="Retour de livre">
                   </form>
+                  </p>
             <?php }
                else { 
                    ?>
-                <p class="card-text">disponibilité:<strong class="nondispo"> dispo</strong></p> 
-                <button type="button" class="btn " data-toggle="modal" data-target="#borrowedModal<?php echo $book->id(); ?>">
+                <p class="card-text"><strong class="nondispo"> disponible</strong></p> 
+                <button type="button" class="btn "  id="button5" data-toggle="modal" data-target="#borrowedModal<?php echo $book->id(); ?>">
 
                           Emprunter
                  </button>
@@ -81,9 +83,9 @@
 
                }
              ?>
-            
-		    <a href="bookDetail.php?id=<?php echo $book->id(); ?> " class="btn" id="button3">Détail</a>
-		    
+          <p>  
+		          <a href="bookDetail.php?id=<?php echo $book->id(); ?> " class="btn" id="button3">Détail</a>
+		    </p>
 		  </div>
 		</div>
 
