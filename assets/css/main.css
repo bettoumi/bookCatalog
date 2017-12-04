@@ -101,10 +101,14 @@ textarea {
 /* ##########################   SMARTPHONE   ########################### */
 /* ##################################################################### */
 /* Extra small devices (phones, less than 768px) */
-*
+body
 {
   margin:0;
   padding: 0;
+}
+.row
+{
+  /*padding: 0px;*/
 }
  
   .navbar, .footer
@@ -200,7 +204,7 @@ textarea {
   }
   .col
   {
-    padding: 0px;
+    /*padding: px;*/
   }
 
   .card-img-top
@@ -215,6 +219,18 @@ textarea {
   .card
   {
     border:none;
+
+  }
+  #carbook
+  {
+    padding-left: 10px;
+
+      
+  }
+
+  .nondispo
+  {
+    color:red;
   }
 
 #userscard

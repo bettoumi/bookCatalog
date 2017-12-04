@@ -89,17 +89,17 @@ spl_autoload_register('loadclass');
 
                  
 				  $book=new $nameclass($bookInfo);
-				  
-			      $bookManager->addBook($book);
-			       
+				    // var_dump($book);
+			      $bookManager->addBook($book);            
+			     
 			   
 
    }
-   else {
+  
 
-   	     /*
+   /*
    	        update book if it is borrowed
-   	      */
+    */
    	  if( isset($_POST['toBorrowed']) AND  isset($_POST['idbook']) AND !empty($_POST['idbook'] ) and isset($_POST['userid']) AND !empty($_POST['userid'] ))
      	
           {
@@ -117,22 +117,23 @@ spl_autoload_register('loadclass');
             /**
            	 * update book if it is returned
            	 */
-           else{
-           	    if ( isset($_POST['returnedBook']) AND  isset($_POST['idbook']) AND !empty($_POST['idbook'] ))
+        
+        if ( isset($_POST['returnedBook']) AND  isset($_POST['idbook']) AND !empty($_POST['idbook'] ))
      	              
-          			{ // var_dump($_POST);
+          			 { 
                 		$book=$bookManager->selectBook((int)htmlspecialchars($_POST['idbook']));
                           
-             			$book->setBorrowed(false);
-             			$book->setId_user(Null);
+             			$book->setBorrowed(0);
+             			$book->setId_user(NULL);
              			 // var_dump($book);
              			$bookManager->updateBook($book);
 
+                          //header('Location:');
                           
                    }
-           	    }
+           	   
          
-}
+
 
       
 			    

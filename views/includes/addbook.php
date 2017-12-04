@@ -30,7 +30,7 @@
     <div class="form-group row">
       <label for="realiseDate" class="col-sm-2 col-form-label">Date</label>
       <div class="col-sm-10">
-        <input type="date" class="form-control"  name="realiseDate" id="realiseDate" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}">
+        <input type="text" class="form-control"  name="realiseDate" id="realiseDate" >
       </div>
     </div>
     <div class="form-group row">
@@ -54,7 +54,7 @@
       <label for="bookimage" class="col-sm-2 col-form-label ">Image</label>
       <div class="col-sm-10">
           <input type="hidden" name="MAX_FILE_SIZE" value="6048576" />
-          <!-- <input type="file" name="bookimage" id="mon_fichier" /> -->
+         
         <input type="file" class="form-control" id="bookimage"  name="bookimage">
       </div>
     </div>

@@ -33,18 +33,20 @@ class BookCatalogManager
    {   
           
       
-
-        $req=$this->db->prepare('INSERT INTO books(title, author, category, abstractb, realiseDate, id_picture) VALUES(:title, :author,  :category, :abstractb, :realiseDate, :id_picture)');
+          
+        $req=$this->db->prepare('INSERT INTO books(title, author, category, abstractb, realiseDate, id_picture) VALUES(:title, :author, :category, :abstractb, :realiseDate, :id_picture)');
        
 
         $req->bindValue('title', $b->title(), PDO::PARAM_STR );
+        // var_dump($req);
         $req->bindValue('author', $b->author(), PDO::PARAM_STR);
        
         $req->bindValue('category', $b->category(),PDO::PARAM_STR);
-        $req->bindValue('abstractb', $b->abstractb(),PDO::PARAM_STR);
-        $req->bindValue('realiseDate', $b->realiseDate());
-        $req->bindValue('id_picture', $b->id_picture(), PDO::PARAM_INT);
+        $req->bindValue('abstractb', $b->abstractb(), PDO::PARAM_STR);
+        $req->bindValue('realiseDate', $b->realiseDate(), PDO::PARAM_STR);
+        $req->bindValue('id_picture', (int)$b->id_picture(), PDO::PARAM_INT);
         $req->execute();
+         var_dump($req->execute());
         //return $this->db->lastInsertId();
     
 
@@ -193,10 +195,7 @@ class BookCatalogManager
 
  public function updateBook(Book $b)
  {
-      var_dump($b->borrowed());
-      var_dump($b->id());
-      var_dump($b->id_user());
-   
+      // var_dump($b);
     $req=$this->db->prepare('UPDATE books SET  borrowed=:borrowed, id_user=:id_user WHERE id=:id') ;
    
       $req->bindValue('id', $b->id(), PDO::PARAM_INT );
@@ -251,7 +250,7 @@ class BookCatalogManager
           
        if(!$this->existUser($u))
 
-       {  var_dump($u);
+       {  //var_dump($u);
         $req=$this->db->prepare('INSERT INTO users(name, adresse) VALUES(:name, :adresse)');
 
         $req->bindValue('name', $u->name(), PDO::PARAM_STR );

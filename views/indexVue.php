@@ -11,7 +11,7 @@
       ?>
    </div>
       <!-- display all of book -->
-  <div class="allbook col-12 col-md-9 col-lg-9  pb-5 mb-5">
+  <div class=" allbook col-12 col-md-9 col-lg-9  pb-5 mb-5">
 
                              <!--  Select category of books -->
   	  <div class="selectbook d-flex flex-column justify-content-center mb-5">
@@ -46,7 +46,7 @@
               	            
               	    
   	      ?>
-  	 	<div class="card  col" style="max-width:15rem ; height: 350px;">
+  	 	<div class="card  col" style="max-width:25rem ; height: 350px;" id="carbook">
 		  <img class="card-img-top img-fluid h-70" style="max-width:10rem" src="<?php echo $book->picture()->src() ;?>" alt="">
 		  <div class="card-block" id="text-card">
 		    <h4 class="card-title">Titre: <?php echo $book->title();?></h4>
@@ -55,19 +55,24 @@
 		    <!-- <p class="card-text">disponibilité: <?php// echo $book->availability();?></p> -->
 
         <?php if($book->borrowed()) 
-            {  ?><p class="card-text">disponibilité:<strong> non dispo</strong></p> 
+            {  ?><p class="card-text">disponibilité:<strong class="nondispo"> non dispo</strong></p>
+              </p>
+               <p class="card-text">Emprunté par:<strong class="nondispo"><?php echo $book->user()->name() ;?></strong></p>
+              </p>
+
+
                    <!-- change the state of book  -->
                   <form action=""  method="post">
                        <input type="hidden" name="idbook" value="<?php echo $book->id(); ?>">
-                      <input type="submit" name="returnedBook" value="Retourlivre">
+                      <input type="submit" name="returnedBook" value="Retour de livre">
                   </form>
             <?php }
                else { 
                    ?>
-                <p class="card-text">disponibilité:<strong> dispo</strong></p> 
+                <p class="card-text">disponibilité:<strong class="nondispo"> dispo</strong></p> 
                 <button type="button" class="btn " data-toggle="modal" data-target="#borrowedModal<?php echo $book->id(); ?>">
 
-                          emprunter
+                          Emprunter
                  </button>
 
              

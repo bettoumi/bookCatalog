@@ -260,13 +260,12 @@
 
     public function setId_user($id_user) 
    {
-          $id_user=(int)$id_user;
-
-		    if(is_int($id_user)or is_null($id_user))
+          
+            // var_dump($id_user);
+		    if(is_int($id_user)and($id_user)>0)
 		   {$this->id_user= $id_user;}
 		     else {
-		          trigger_error('id_user invalide ', E_USER_WARNING);
-		          return;
+		          $this->id_user=NULL;
 		     }	
 		   
     }

@@ -29,10 +29,10 @@
 
 			    <ul class="navbar-nav">
 			      <li class="nav-item active">
-			        <a class="nav-link ml-5" href="#">livres <span class="sr-only">(current)</span></a>
+			        <a class="nav-link ml-5" href="index.php">livres <span class="sr-only">(current)</span></a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="#">Utilisateurs</a>
+			        <a class="nav-link" href="users.php">Utilisateurs</a>
 			      </li>
 			     			     
 			    </ul>
