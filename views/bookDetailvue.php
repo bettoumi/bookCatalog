@@ -5,8 +5,8 @@
 
  ?>
      
- <div class="container-fluid mt-5">
- <div class="card mb-3" style="max-width:20rem ; height: 350px;"">
+ <div class="container-fluid mx-auto mt-5 mb-5">
+ <div class="card mb-3" style="max-width:20rem ;">
   <img class="card-img-top img-fluid" style="max-width:10rem" src="<?php echo $book->picture()->src(); ?>" alt="image livre">
   <div class="card-block">
     <h4 class="card-title"><?php echo $book->title();?></h4>
@@ -32,14 +32,14 @@
                else { 
                    ?>
                 <p class="card-text"><strong class="nondispo"> disponible</strong></p> 
-                <button type="button" class="btn"  id="button6" data-toggle="modal" data-target="#borroweddetail<?php echo $book->id();?>">
+                <button type="button" class="btn"  id="button6" data-toggle="modal" data-target="#borrowedModal<?php echo $book->id(); ?>">
 
                           Emprunter
                  </button>
 
              
              <?php
-                 include 'includes/detailBookModal.php' ;
+                 include 'includes/borrowedBookModal.php' ;
 
                }
              ?>
@@ -51,3 +51,6 @@
 </div>
 
 </div>
+<?php
+   include("template/footer.php")
+  ?>
