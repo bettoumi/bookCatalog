@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+        <link rel="shortcut icon" href="../favicone.jpeg" type="x-icon"> 
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Crimson+Text" rel="stylesheet"> 
          <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Nixie+One" rel="stylesheet"> 
         <link rel="stylesheet" href="../assets/css/normalize.css">
