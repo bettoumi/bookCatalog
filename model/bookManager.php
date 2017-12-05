@@ -47,8 +47,7 @@ class BookCatalogManager
         $req->bindValue('id_picture', (int)$b->id_picture(), PDO::PARAM_INT);
         $req->execute();
         
-        //return $this->db->lastInsertId();
-    
+          
 
   } 
 
@@ -130,7 +129,7 @@ class BookCatalogManager
                       LEFT JOIN users AS U   ON B.id_user=U.id
                                 
                       WHERE B.id='.$id);
-         // $req->bindValue('id', $id, PDO::PARAM_INT);
+       
          $req->execute();
 
          $resul=$req->fetch(PDO::FETCH_ASSOC);
@@ -138,7 +137,6 @@ class BookCatalogManager
          $categ=ucfirst($resul['category']);
          $picture=new Picture($resul);
          $user=new User($resul);
-         // var_dump($picture);
          $book= new $categ($resul);
          $book->setPicture($picture);
          $book->setUser($user);
@@ -156,14 +154,14 @@ class BookCatalogManager
         $resul=$req2->fetchALL(PDO::FETCH_ASSOC);
         
                
-        // var_dump($resul);
+        
         foreach ($resul as $book ) {
             $categ=ucfirst($book['category']);
                  $book1= new $categ($book); 
 
                   $book1->setPicture(new Picture($book));
                   $book1->setUser(new User($book));
-                  // var_dump($book1->user()->name());
+                  
                   $books[]=$book1;
         }
          
