@@ -153,7 +153,8 @@ html
     background-image: url('../../assets/img/imgaccuielmobil.jpg');
     background-size: cover;
     height: 200px;
-    width: 800px;
+    width: 90%;
+    margin: auto;
     /*border:1px solid red;*/
     color:rgb(253,254,246);
     

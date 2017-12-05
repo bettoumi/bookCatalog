@@ -14,7 +14,7 @@
   <div class="allbook col-12 col-md-12 col-lg-9 mx-auto  pb-5 mb-5">
 
                              <!--  Select category of books -->
-  	  <div class="selectbook d-flex flex-column justify-content-center mb-5">
+  	  <div class="selectbook d-flex flex-column w-75 justify-content-center mb-5">
          <h2 class="align-self-center">Livres</h2>
          <div class="chose w-50 align-self-center mt-3 offset-3">
              <form method="post" action="">
